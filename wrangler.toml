@@ -1,6 +1,0 @@
-name = "dummyimage"
-main = "src/index.js"
-compatibility_date = "2024-01-01"
-
-# This configuration is optimized for Cloudflare's free tier
-# Free tier includes 100,000 requests per day

@@ -1,12 +1,8 @@
 {
-  "name": "dummyimage",
-  "version": "1.0.0",
+	"name": "dummyimage",
   "description": "An alternative to dummyimage.com deployed on Cloudflare Workers",
-  "main": "src/index.js",
-  "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
-  },
+	"version": "0.0.0",
+	"private": true,
   "keywords": [
     "dummy",
     "image",
@@ -14,9 +10,17 @@
     "cloudflare",
     "workers"
   ],
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "wrangler": "^3.0.0"
-  }
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"start": "wrangler dev",
+		"test": "vitest",
+		"cf-typegen": "wrangler types"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"typescript": "^5.5.2",
+		"vitest": "~3.2.0",
+		"wrangler": "^4.47.0"
+	}
 }
