@@ -5,6 +5,7 @@ node_modules/
 .wrangler/
 dist/
 worker/
+.mf/
 
 # Environment files
 .env
