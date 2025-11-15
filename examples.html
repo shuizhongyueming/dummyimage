@@ -62,55 +62,75 @@
     </div>
 
     <div class="example">
-        <h3>Example 2: Custom Background Color</h3>
-        <p>URL: <code>/300x200/ff0000</code></p>
-        <img src="http://localhost:8787/300x200/ff0000" alt="300x200 red background">
-        <p>Red background (#ff0000) with default foreground color.</p>
+        <h3>Example 2: With Extension</h3>
+        <p>URL: <code>/600x400.png</code></p>
+        <img src="http://localhost:8787/600x400.png" alt="600x400 with png extension">
+        <p>Extensions are recognized but all images are returned as SVG.</p>
     </div>
 
     <div class="example">
-        <h3>Example 3: Custom Background and Foreground Colors</h3>
-        <p>URL: <code>/400x300/0066cc/ffffff</code></p>
-        <img src="http://localhost:8787/400x300/0066cc/ffffff" alt="400x300 blue and white">
-        <p>Blue background (#0066cc) with white text (#ffffff).</p>
+        <h3>Example 3: Path-based Colors</h3>
+        <p>URL: <code>/400x300/ff0000/ffffff</code></p>
+        <img src="http://localhost:8787/400x300/ff0000/ffffff" alt="400x300 red and white">
+        <p>Red background (#ff0000) with white text (#ffffff).</p>
     </div>
 
     <div class="example">
-        <h3>Example 4: Custom Text</h3>
-        <p>URL: <code>/500x350/ff6600/000000/Hello%20World</code></p>
-        <img src="http://localhost:8787/500x350/ff6600/000000/Hello%20World" alt="500x350 with custom text">
-        <p>Orange background with black text saying "Hello World".</p>
+        <h3>Example 4: Custom Text via Query Parameter</h3>
+        <p>URL: <code>/500x350?text=Hello+World</code></p>
+        <img src="http://localhost:8787/500x350?text=Hello+World" alt="500x350 with custom text">
+        <p>Custom text using query parameter. Use + for spaces.</p>
     </div>
 
     <div class="example">
-        <h3>Example 5: 3-Character Hex Colors</h3>
+        <h3>Example 5: Combined Path Colors and Query Text</h3>
+        <p>URL: <code>/600x400/0066cc/ffffff?text=Sample+Image</code></p>
+        <img src="http://localhost:8787/600x400/0066cc/ffffff?text=Sample+Image" alt="600x400 combined">
+        <p>Blue background with white text and custom message.</p>
+    </div>
+
+    <div class="example">
+        <h3>Example 6: Query Parameters Override Path</h3>
+        <p>URL: <code>/400x300/000/fff?bg=ff6600&fg=000000&text=Override</code></p>
+        <img src="http://localhost:8787/400x300/000/fff?bg=ff6600&fg=000000&text=Override" alt="400x300 override">
+        <p>Query parameters (orange bg, black fg) override path colors (black/white).</p>
+    </div>
+
+    <div class="example">
+        <h3>Example 7: 3-Character Hex Colors</h3>
         <p>URL: <code>/250x150/f00/fff</code></p>
         <img src="http://localhost:8787/250x150/f00/fff" alt="250x150 with 3-char hex">
         <p>Short-hand hex colors are automatically expanded (f00 → ff0000, fff → ffffff).</p>
     </div>
 
     <div class="example">
-        <h3>Example 6: Various Sizes</h3>
-        <p>URL: <code>/800x200/333/fff/Banner%20Image</code></p>
-        <img src="http://localhost:8787/800x200/333/fff/Banner%20Image" alt="800x200 banner">
-        <p>Wide banner-style image.</p>
+        <h3>Example 8: Banner Image</h3>
+        <p>URL: <code>/800x200/333/fff?text=Banner+Image</code></p>
+        <img src="http://localhost:8787/800x200/333/fff?text=Banner+Image" alt="800x200 banner">
+        <p>Wide banner-style image with dark background.</p>
     </div>
 
     <div class="example">
-        <h3>Example 7: Square Images</h3>
-        <p>URL: <code>/200x200/9c27b0/ffffff/Logo</code></p>
-        <img src="http://localhost:8787/200x200/9c27b0/ffffff/Logo" alt="200x200 square">
-        <p>Square image suitable for avatars or logos.</p>
+        <h3>Example 9: Square Avatar</h3>
+        <p>URL: <code>/200x200/9c27b0/ffffff?text=Avatar</code></p>
+        <img src="http://localhost:8787/200x200/9c27b0/ffffff?text=Avatar" alt="200x200 square">
+        <p>Square image suitable for avatars or profile pictures.</p>
     </div>
 
     <div class="example">
         <h3>Usage in HTML</h3>
-        <pre><code>&lt;img src="YOUR_WORKER_URL/600x400/cccccc/969696" alt="Placeholder"&gt;</code></pre>
+        <pre><code>&lt;img src="YOUR_WORKER_URL/600x400/cccccc/969696" alt="Placeholder"&gt;
+&lt;img src="YOUR_WORKER_URL/600x400?text=Custom+Text" alt="Custom"&gt;</code></pre>
     </div>
 
     <div class="example">
         <h3>Usage in CSS</h3>
-        <pre><code>background-image: url('YOUR_WORKER_URL/1920x1080/000/fff/Hero%20Image');</code></pre>
+        <pre><code>background-image: url('YOUR_WORKER_URL/1920x1080/000/fff?text=Hero+Image');</code></pre>
+    </div>
+
+    <div class="note">
+        <strong>Compatibility:</strong> This service is compatible with dummyimage.com URL format. 
+        You can use query parameters (?text=, ?bg=, ?fg=) or path-based parameters interchangeably.
     </div>
 </body>
 </html>
