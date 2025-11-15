@@ -2,6 +2,8 @@
 
 An alternative to [dummyimage.com](https://dummyimage.com/) that runs on Cloudflare Workers (free tier). **Fully compatible with dummyimage.com URL format** for seamless migration.
 
+> **Note:** This project is based on the original [dummyimage](https://github.com/kingkool68/dummyimage) by kingkool68. This is a Cloudflare Workers implementation that maintains full compatibility with the original service.
+
 ## Features
 
 - Generate placeholder images with custom dimensions
@@ -28,23 +30,54 @@ Examples:
 
 ### Dimension Keywords
 
-Supports standard dimension keywords:
+Supports standard dimension keywords with aliases:
 
-**IAB Ad Sizes:**
+**IAB Standard Ad Sizes:**
 - `/mediumrectangle` or `/medrect` - 300x250
+- `/squarepopup` or `/sqrpop` - 250x250
+- `/verticalrectangle` or `/vertrec` - 240x400
+- `/largerectangle` or `/lrgrec` - 336x280
+- `/rectangle` or `/rec` - 180x150
+- `/popunder` or `/pop` - 720x300
+- `/fullbanner` or `/fullban` - 468x60
+- `/halfbanner` or `/halfban` - 234x60
+- `/microbar` or `/mibar` - 88x31
+- `/button1` or `/but1` - 120x90
+- `/button2` or `/but2` - 120x60
+- `/verticalbanner` or `/vertban` - 120x240
+- `/squarebutton` or `/sqrbut` - 125x125
 - `/leaderboard` or `/leadbrd` - 728x90
-- `/skyscraper` or `/skyscrpr` - 120x600
 - `/wideskyscraper` or `/wiskyscrpr` - 160x600
-- And many more...
+- `/skyscraper` or `/skyscrpr` - 120x600
+- `/halfpage` or `/hpge` - 300x600
 
 **Display Standards:**
+- `/cga` - 320x200
+- `/qvga` - 320x240
 - `/vga` - 640x480
+- `/wvga` - 800x480
+- `/svga` - 800x600
+- `/wsvga` - 1024x600
 - `/xga` - 1024x768
+- `/wxga` - 1280x800
+- `/sxga` - 1280x1024
+- `/wsxga` - 1440x900
+- `/uxga` - 1600x1200
+- `/wuxga` - 1920x1200
+- `/qxga` - 2048x1536
+- `/wqxga` - 2560x1600
+- `/qsxga` - 2560x2048
+- `/wqsxga` - 3200x2048
+- `/quxga` - 3200x2400
+- `/wquxga` - 3840x2400
+
+**Video Standards:**
+- `/ntsc` - 720x480
+- `/pal` - 768x576
 - `/hd720` or `/720p` - 1280x720
 - `/hd1080` or `/1080p` - 1920x1080
+- `/2k` - 2560x1440
 - `/4k` - 3840x2160
-
-[See full list of supported keywords](https://dummyimage.com/)
 
 ### With Path-based Colors
 
