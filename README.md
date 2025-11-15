@@ -1,19 +1,20 @@
 # DummyImage
 
-An alternative to [dummyimage.com](https://dummyimage.com/) that runs on Cloudflare Workers (free tier).
+An alternative to [dummyimage.com](https://dummyimage.com/) that runs on Cloudflare Workers (free tier). **Fully compatible with dummyimage.com URL format** for seamless migration.
 
 ## Features
 
 - Generate placeholder images with custom dimensions
 - Customize background and foreground colors
 - Add custom text overlays
+- Support for dimension keywords (VGA, HD1080, mediumrectangle, etc.)
 - Fast, edge-cached responses via Cloudflare's global network
 - Free to deploy and use (within Cloudflare's free tier limits)
-- Compatible with dummyimage.com URL format
+- **100% compatible with dummyimage.com** - drop-in replacement
 
 ## Usage
 
-The service supports the same URL patterns as dummyimage.com:
+The service supports all dummyimage.com URL patterns:
 
 ### Basic Usage
 
@@ -21,7 +22,29 @@ The service supports the same URL patterns as dummyimage.com:
 /{width}x{height}[.ext]
 ```
 
-Example: `/600x400` or `/600x400.png` - generates a 600x400px image with default colors
+Examples: 
+- `/600x400` - generates a 600x400px image with default colors
+- `/600x400.png` - with file extension (all formats return SVG)
+
+### Dimension Keywords
+
+Supports standard dimension keywords:
+
+**IAB Ad Sizes:**
+- `/mediumrectangle` or `/medrect` - 300x250
+- `/leaderboard` or `/leadbrd` - 728x90
+- `/skyscraper` or `/skyscrpr` - 120x600
+- `/wideskyscraper` or `/wiskyscrpr` - 160x600
+- And many more...
+
+**Display Standards:**
+- `/vga` - 640x480
+- `/xga` - 1024x768
+- `/hd720` or `/720p` - 1280x720
+- `/hd1080` or `/1080p` - 1920x1080
+- `/4k` - 3840x2160
+
+[See full list of supported keywords](https://dummyimage.com/)
 
 ### With Path-based Colors
 
@@ -32,8 +55,10 @@ Example: `/600x400` or `/600x400.png` - generates a 600x400px image with default
 
 Examples:
 - `/600x400/ff0000` - red background
-- `/600x400/000/fff` - black background with white text
-- `/600x400/0066cc/ffffff.png` - blue background with white text (as PNG)
+- `/600x400/ccc/000` - light gray background with black text
+- `/600x400/0066cc/ffffff.png` - blue background with white text
+
+**Note:** Extensions can appear anywhere in the path (e.g., `/600x400.png/ff0000/ffffff`)
 
 ### With Query Parameters
 
@@ -42,18 +67,20 @@ Examples:
 ```
 
 Examples:
-- `/600x400?text=Hello+World` - custom text (+ represents space)
+- `/600x400?text=Hello+World` - custom text (+ = space)
 - `/600x400?bg=ff0000&fg=ffffff` - colors via query parameters
-- `/600x400/000/fff?text=Sample+Image` - combined path colors and query text
+- `/600x400/ccc/000?text=Sample+Image` - combined path colors and query text
+
+### Text Features
+
+- Use `+` for spaces: `?text=Hello+World`
+- Use `|` for line breaks: `?text=Line1|Line2`
+- Default text shows dimensions with × symbol: `600 × 400`
 
 ### Supported Extensions
 
 The following extensions are recognized (all return SVG):
-- `.svg`
-- `.png`
-- `.jpg` / `.jpeg`
-- `.gif`
-- `.webp`
+- `.svg`, `.png`, `.jpg` / `.jpeg`, `.gif`, `.webp`
 
 ## Color Format
 
@@ -66,15 +93,9 @@ Colors can be specified via:
 - **Path**: `/{width}x{height}/{bgcolor}/{fgcolor}`
 - **Query parameters**: `?bg={bgcolor}&fg={fgcolor}` (overrides path colors)
 
-Default colors:
-- Background: `dddddd` (light gray)
-- Foreground: `777777` (medium gray)
-
-## Text Parameter
-
-Custom text can be added via the `text` query parameter:
-- Use `+` for spaces: `?text=Hello+World`
-- Default text shows dimensions: `600×400`
+**Default colors:**
+- Background: `ccc` (light gray - #cccccc)
+- Foreground: `000` (black - #000000)
 
 ## Deployment on Cloudflare
 
@@ -118,10 +139,12 @@ This will start a local server (typically at http://localhost:8787) where you ca
 
 ## Examples
 
-- `/300x200` - 300x200px with default gray colors
+- `/300x200` - 300x200px with default colors (ccc/000)
+- `/vga` - 640x480 using VGA keyword
+- `/mediumrectangle` - 300x250 IAB ad size
 - `/600x400/0066cc/ffffff` - Blue background with white text
 - `/800x600.png?text=Sample+Image` - 800x600 with custom text
-- `/400x300/ff6600/000000?text=Orange+Banner` - Orange background with black text
+- `/400x300/ff6600/000000?text=Line1|Line2` - Multi-line text with | separator
 
 ## Free Tier Limits
 
