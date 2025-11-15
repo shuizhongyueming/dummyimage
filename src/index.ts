@@ -23,6 +23,7 @@ interface DimensionKeywords {
   readonly [key: string]: string;
 }
 
+// prettier-ignore
 const DIMENSION_KEYWORDS: DimensionKeywords = {
   // IAB Standard ad sizes
   'mediumrectangle': '300x250', 'medrect': '300x250',
@@ -56,10 +57,9 @@ const DIMENSION_KEYWORDS: DimensionKeywords = {
   '2k': '2560x1440', '4k': '3840x2160'
 } as const;
 
-
 const SUPPORTED_FORMATS = ['webp', 'gif', 'jpg', 'jpeg', 'png', 'svg'] as const;
 
-type SupportedFormat = typeof SUPPORTED_FORMATS[number];
+type SupportedFormat = (typeof SUPPORTED_FORMATS)[number];
 
 /**
  * Sanitize color input (allows 3/6 digit hex, prevents injection)
@@ -71,7 +71,10 @@ function sanitizeColor(c: string | null | undefined): string {
   const cleaned = String(c).replace(/[^0-9a-fA-F]/g, '');
   // Expand 3-char to 6-char hex
   if (cleaned.length === 3) {
-    return cleaned.split('').map(ch => ch + ch).join('');
+    return cleaned
+      .split('')
+      .map(ch => ch + ch)
+      .join('');
   }
   if (cleaned.length === 6) {
     return cleaned;
@@ -106,7 +109,7 @@ export default {
     if (request.method !== 'GET' && request.method !== 'HEAD') {
       return new Response('Method not allowed', {
         status: 405,
-        headers: { 'Content-Type': 'text/plain' }
+        headers: { 'Content-Type': 'text/plain' },
       });
     }
 
@@ -170,14 +173,14 @@ export default {
     if (area > 33177600 || width > 9999 || height > 9999) {
       return new Response('Too big of an image!', {
         status: 400,
-        headers: { 'Content-Type': 'text/plain' }
+        headers: { 'Content-Type': 'text/plain' },
       });
     }
 
     if (width < 1 || height < 1) {
       return new Response('Too small of an image!', {
         status: 400,
-        headers: { 'Content-Type': 'text/plain' }
+        headers: { 'Content-Type': 'text/plain' },
       });
     }
 
@@ -236,10 +239,7 @@ export default {
     // Calculate font size (matching PHP's approach more closely)
     // PHP: max(min($width / strlen($text) * 1.15, $height * 0.5), 5)
     const textLength = text.replace(/\n/g, '').length;
-    let fontSize = Math.min(
-      width / textLength * 1.15,
-      height * 0.5
-    );
+    let fontSize = Math.min((width / textLength) * 1.15, height * 0.5);
     fontSize = Math.max(5, Math.min(200, fontSize)); // Add reasonable bounds
 
     // Generate SVG (matching PHP output structure)
@@ -255,7 +255,7 @@ export default {
     const headers = {
       'Content-Type': 'image/svg+xml; charset=utf-8',
       'Cache-Control': 'public, max-age=31536000, immutable',
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
     };
 
     const resp = new Response(svg, { status: 200, headers });
@@ -264,5 +264,5 @@ export default {
     ctx.waitUntil(cache.put(cacheKey, resp.clone()));
 
     return resp;
-  }
+  },
 };
