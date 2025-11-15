@@ -53,7 +53,7 @@ export default {
     return new Response(svg, {
       headers: {
         'Content-Type': 'image/svg+xml',
-        'Cache-Control': 'public, max-age=31536000, immutable'
+        'Cache-Control': 'public, max-age=3600'
       }
     });
   }
