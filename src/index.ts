@@ -56,9 +56,10 @@ const DIMENSION_KEYWORDS: DimensionKeywords = {
   '2k': '2560x1440', '4k': '3840x2160'
 } as const;
 
-type SupportedFormat = 'webp' | 'gif' | 'jpg' | 'jpeg' | 'png' | 'svg';
 
 const SUPPORTED_FORMATS = ['webp', 'gif', 'jpg', 'jpeg', 'png', 'svg'] as const;
+
+type SupportedFormat = typeof SUPPORTED_FORMATS[number];
 
 /**
  * Sanitize color input (allows 3/6 digit hex, prevents injection)
@@ -115,6 +116,7 @@ export default {
     const cache = caches.default;
     const cacheKey = new Request(request.url, request);
     const cached = await cache.match(cacheKey);
+    console.log('Cache hit:', request.url);
     if (cached) return cached;
 
     // Parse the entire path, mimicking PHP's approach
