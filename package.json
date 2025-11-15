@@ -1,0 +1,22 @@
+{
+  "name": "dummyimage",
+  "version": "1.0.0",
+  "description": "An alternative to dummyimage.com deployed on Cloudflare Workers",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": [
+    "dummy",
+    "image",
+    "placeholder",
+    "cloudflare",
+    "workers"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
